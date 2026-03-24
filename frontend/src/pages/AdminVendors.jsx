@@ -18,7 +18,7 @@ const AdminVendors = () => {
     }, [user]);
 
     const fetchVendors = () => {
-        fetch('http://localhost/aamya_holiday/backend/public/api/vendors')
+        fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/vendors' : '/backend/public/api/vendors'))
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success') setVendors(data.data);
@@ -44,7 +44,7 @@ const AdminVendors = () => {
         if (!window.confirm(`Are you sure you want to permanently delete this vendor?`)) return;
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost/aamya_holiday/backend/public/api/vendors/${id}`, {
+            const response = await fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/vendors/${id}`, {
                 method: 'DELETE'
             });
             const data = await response.json();
@@ -67,7 +67,7 @@ const AdminVendors = () => {
         setMsg({ type: '', text: '' });
 
         try {
-            const response = await fetch('http://localhost/aamya_holiday/backend/public/api/vendors', {
+            const response = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/vendors' : '/backend/public/api/vendors'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

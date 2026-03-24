@@ -6,7 +6,7 @@ const Destinations = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost/aamya_holiday/backend/public/api/destinations')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/destinations' : '/backend/public/api/destinations'))
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {

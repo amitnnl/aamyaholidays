@@ -17,7 +17,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost/aamya_holiday/backend/public/api/auth/login', {
+      const response = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/auth/login' : '/backend/public/api/auth/login'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

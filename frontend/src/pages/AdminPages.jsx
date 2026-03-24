@@ -16,7 +16,7 @@ const AdminPages = () => {
 
   const fetchPages = () => {
     setLoading(true);
-    fetch('http://localhost/aamya_holiday/backend/public/api/pages')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/pages' : '/backend/public/api/pages'))
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -35,7 +35,7 @@ const AdminPages = () => {
 
   const handleEdit = (slug) => {
     setMessage('Loading page data...');
-    fetch(`http://localhost/aamya_holiday/backend/public/api/pages/${slug}`)
+    fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/pages/${slug}`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -72,7 +72,7 @@ const AdminPages = () => {
       const payload = { ...formData, is_published: formData.is_published ? 1 : 0 };
       if (editingId) payload.id = editingId;
 
-      const res = await fetch('http://localhost/aamya_holiday/backend/public/api/pages', {
+      const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/pages' : '/backend/public/api/pages'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

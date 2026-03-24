@@ -24,7 +24,7 @@ const Checkout = () => {
       return;
     }
 
-    fetch(`http://localhost/aamya_holiday/backend/public/api/packages/${slug}`)
+    fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/packages/${slug}`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -56,7 +56,7 @@ const Checkout = () => {
             total_amount: total
         };
 
-        const res = await fetch('http://localhost/aamya_holiday/backend/public/api/bookings', {
+        const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/bookings' : '/backend/public/api/bookings'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)

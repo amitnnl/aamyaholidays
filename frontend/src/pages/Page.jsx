@@ -10,7 +10,7 @@ const Page = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost/aamya_holiday/backend/public/api/pages/${slug}`)
+    fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/pages/${slug}`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success' && data.data && data.data.is_published == 1) {

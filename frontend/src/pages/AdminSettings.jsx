@@ -54,7 +54,7 @@ const AdminSettings = () => {
     setMessage('');
 
     try {
-      const res = await fetch('http://localhost/aamya_holiday/backend/public/api/settings', {
+      const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/settings' : '/backend/public/api/settings'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

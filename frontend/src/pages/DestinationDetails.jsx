@@ -8,7 +8,7 @@ const DestinationDetails = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost/aamya_holiday/backend/public/api/destinations/${slug}`)
+        fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/destinations/${slug}`)
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success') {

@@ -6,7 +6,7 @@ const Blog = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost/aamya_holiday/backend/public/api/blog')
+        fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/blog' : '/backend/public/api/blog'))
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success') {

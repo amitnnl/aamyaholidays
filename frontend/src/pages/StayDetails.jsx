@@ -16,7 +16,7 @@ const StayDetails = () => {
   const [guests, setGuests] = useState(2);
 
   useEffect(() => {
-    fetch(`http://localhost/aamya_holiday/backend/public/api/stays/${slug}`)
+    fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/stays/${slug}`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -58,7 +58,7 @@ const StayDetails = () => {
           return;
       }
       try {
-          const res = await fetch('http://localhost/aamya_holiday/backend/public/api/favorites', {
+          const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/favorites' : '/backend/public/api/favorites'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ user_id: user.id, item_type: 'stay', item_id: stay.id })

@@ -9,7 +9,7 @@ const AdminBookings = () => {
 
   useEffect(() => {
     if (user && user.role === 'admin') {
-      fetch('http://localhost/aamya_holiday/backend/public/api/admin/bookings')
+      fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/admin/bookings' : '/backend/public/api/admin/bookings'))
         .then(res => res.json())
         .then(data => {
             if (data.status === 'success') {
@@ -81,7 +81,7 @@ const AdminBookings = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a 
-                            href={`http://localhost/aamya_holiday/backend/public/api/pdf/booking/${row.booking_ref}`} 
+                            href={`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/pdf/booking/${row.booking_ref}`} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-teal-600 hover:text-teal-900 font-bold bg-teal-50 px-3 py-1.5 rounded-lg transition"

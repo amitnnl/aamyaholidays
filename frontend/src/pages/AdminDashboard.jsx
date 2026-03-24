@@ -15,10 +15,10 @@ const AdminDashboard = () => {
   useEffect(() => {
     if (user && user.role === 'admin') {
       Promise.all([
-          fetch('http://localhost/aamya_holiday/backend/public/api/leads').then(res => res.json()),
-          fetch('http://localhost/aamya_holiday/backend/public/api/admin/bookings').then(res => res.json()),
-          fetch('http://localhost/aamya_holiday/backend/public/api/packages').then(res => res.json()),
-          fetch('http://localhost/aamya_holiday/backend/public/api/destinations').then(res => res.json())
+          fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/leads' : '/backend/public/api/leads')).then(res => res.json()),
+          fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/admin/bookings' : '/backend/public/api/admin/bookings')).then(res => res.json()),
+          fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/packages' : '/backend/public/api/packages')).then(res => res.json()),
+          fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/destinations' : '/backend/public/api/destinations')).then(res => res.json())
       ]).then(([leadsData, bookingsData, packagesData, destData]) => {
           if (leadsData.status === 'success') setLeads(leadsData.data);
           if (bookingsData.status === 'success') setBookings(bookingsData.data);

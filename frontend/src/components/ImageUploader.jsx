@@ -15,7 +15,7 @@ const ImageUploader = ({ value, onChange, label = "Image Upload" }) => {
         formData.append('image', file);
 
         try {
-            const res = await fetch('http://localhost/aamya_holiday/backend/public/api/upload', {
+            const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/upload' : '/backend/public/api/upload'), {
                 method: 'POST',
                 body: formData
             });

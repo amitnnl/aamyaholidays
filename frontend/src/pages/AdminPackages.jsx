@@ -22,7 +22,7 @@ const AdminPackages = () => {
   }, [user]);
 
   const fetchVendors = () => {
-    fetch('http://localhost/aamya_holiday/backend/public/api/vendors')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/vendors' : '/backend/public/api/vendors'))
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') setVendors(data.data);
@@ -30,7 +30,7 @@ const AdminPackages = () => {
   };
 
   const fetchPackages = () => {
-    fetch('http://localhost/aamya_holiday/backend/public/api/packages')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/packages' : '/backend/public/api/packages'))
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') setPackages(data.data);
@@ -38,7 +38,7 @@ const AdminPackages = () => {
   };
 
   const fetchDestinations = () => {
-    fetch('http://localhost/aamya_holiday/backend/public/api/destinations')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/destinations' : '/backend/public/api/destinations'))
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') setDestinations(data.data);
@@ -69,7 +69,7 @@ const AdminPackages = () => {
     if (!window.confirm(`Are you sure you want to permanently delete this package?`)) return;
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost/aamya_holiday/backend/public/api/packages/${id}`, {
+      const response = await fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/packages/${id}`, {
         method: 'DELETE'
       });
       const data = await response.json();
@@ -96,7 +96,7 @@ const AdminPackages = () => {
     setMsg({ type: '', text: '' });
 
     try {
-      const response = await fetch('http://localhost/aamya_holiday/backend/public/api/packages', {
+      const response = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/packages' : '/backend/public/api/packages'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

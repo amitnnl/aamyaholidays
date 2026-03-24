@@ -19,7 +19,7 @@ const AdminDestinations = () => {
   }, []);
 
   const fetchDestinations = () => {
-    fetch('http://localhost/aamya_holiday/backend/public/api/destinations')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/destinations' : '/backend/public/api/destinations'))
       .then(res => res.json())
       .then(data => {
         if(data.status === 'success') setDestinations(data.data);
@@ -47,7 +47,7 @@ const AdminDestinations = () => {
     if (!window.confirm(`Are you sure you want to permanently delete this location?`)) return;
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost/aamya_holiday/backend/public/api/destinations/${id}`, {
+      const response = await fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/destinations/${id}`, {
         method: 'DELETE'
       });
       const data = await response.json();
@@ -76,7 +76,7 @@ const AdminDestinations = () => {
     setMsg({ type: '', text: '' }); // Clear previous messages
 
     try {
-      const response = await fetch('http://localhost/aamya_holiday/backend/public/api/destinations', {
+      const response = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/destinations' : '/backend/public/api/destinations'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

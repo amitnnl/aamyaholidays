@@ -17,7 +17,7 @@ const PackageDetails = () => {
   const [inquiryError, setInquiryError] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost/aamya_holiday/backend/public/api/packages/${slug}`)
+    fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/packages/${slug}`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -52,7 +52,7 @@ const PackageDetails = () => {
           message: inquiryData.message
       };
 
-      const res = await fetch('http://localhost/aamya_holiday/backend/public/api/leads', {
+      const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/leads' : '/backend/public/api/leads'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -79,7 +79,7 @@ const PackageDetails = () => {
           return;
       }
       try {
-          const res = await fetch('http://localhost/aamya_holiday/backend/public/api/favorites', {
+          const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/favorites' : '/backend/public/api/favorites'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ user_id: user.id, item_type: 'package', item_id: pkg.id })

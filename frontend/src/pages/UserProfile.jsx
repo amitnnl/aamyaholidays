@@ -19,7 +19,7 @@ const UserProfile = () => {
   useEffect(() => {
     if (user && activeTab === 'bookings') {
       setLoadingBookings(true);
-      fetch(`http://localhost/aamya_holiday/backend/public/api/user/bookings?user_id=${user.id}`)
+      fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/user/bookings?user_id=${user.id}`)
         .then(res => res.json())
         .then(data => {
             if(data.status === 'success') {
@@ -31,7 +31,7 @@ const UserProfile = () => {
     
     if (user && activeTab === 'wishlist') {
       setLoadingWishlist(true);
-      fetch(`http://localhost/aamya_holiday/backend/public/api/user/favorites?user_id=${user.id}`)
+      fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/user/favorites?user_id=${user.id}`)
         .then(res => res.json())
         .then(data => {
             if(data.status === 'success') {
@@ -51,7 +51,7 @@ const UserProfile = () => {
       e.preventDefault();
       setUpdateMsg({ type: 'info', text: 'Updating profile...' });
       try {
-          const res = await fetch('http://localhost/aamya_holiday/backend/public/api/auth/update', {
+          const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/auth/update' : '/backend/public/api/auth/update'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -171,7 +171,7 @@ const UserProfile = () => {
                               <span className="text-xl font-bold text-slate-900">₹{bkg.total_amount}</span>
                            </div>
                            <a 
-                             href={`http://localhost/aamya_holiday/backend/public/api/pdf/booking/${bkg.booking_ref}`} 
+                             href={`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/pdf/booking/${bkg.booking_ref}`} 
                              target="_blank" 
                              rel="noopener noreferrer" 
                              className="flex items-center gap-2 text-sm font-bold text-teal-600 hover:text-teal-700 hover:bg-teal-50 px-4 py-2 rounded-lg transition"

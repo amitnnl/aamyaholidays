@@ -8,7 +8,7 @@ const Packages = () => {
   const search = searchParams.get('search') || '';
 
   useEffect(() => {
-    fetch('http://localhost/aamya_holiday/backend/public/api/packages')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/packages' : '/backend/public/api/packages'))
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {

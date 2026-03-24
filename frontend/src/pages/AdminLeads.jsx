@@ -14,7 +14,7 @@ const AdminLeads = () => {
   }, [user]);
 
   const fetchLeads = () => {
-    fetch('http://localhost/aamya_holiday/backend/public/api/leads')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/leads' : '/backend/public/api/leads'))
       .then(res => res.json())
       .then(data => {
           if (data.status === 'success') {
@@ -78,7 +78,7 @@ const AdminLeads = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
                         <a 
-                            href={`http://localhost/aamya_holiday/backend/public/api/pdf/invoice/${lead.id}`} 
+                            href={`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/pdf/invoice/${lead.id}`} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-teal-600 hover:text-white hover:bg-teal-600 border border-teal-600 px-3 py-1.5 rounded font-bold mr-3 transition-colors inline-block"

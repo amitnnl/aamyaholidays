@@ -23,7 +23,7 @@ export const SettingsProvider = ({ children }) => {
 
     const refreshSettings = () => {
         setLoading(true);
-        fetch('http://localhost/aamya_holiday/backend/public/api/settings')
+        fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/settings' : '/backend/public/api/settings'))
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success' && Object.keys(data.data).length > 0) {

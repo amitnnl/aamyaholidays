@@ -18,7 +18,7 @@ const AdminBlog = () => {
   const fetchBlogs = () => {
     setLoading(true);
     // Add ?admin=true to bypass the 'published filter' in controller
-    fetch('http://localhost/aamya_holiday/backend/public/api/blog?admin=true')
+    fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/blog?admin=true' : '/backend/public/api/blog?admin=true'))
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -37,7 +37,7 @@ const AdminBlog = () => {
 
   const handleEdit = (slug) => {
     setMessage('Loading post data...');
-    fetch(`http://localhost/aamya_holiday/backend/public/api/blog/${slug}`)
+    fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/blog/${slug}`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -75,7 +75,7 @@ const AdminBlog = () => {
       const payload = { ...formData };
       if (editingId) payload.id = editingId;
 
-      const res = await fetch('http://localhost/aamya_holiday/backend/public/api/blog', {
+      const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/blog' : '/backend/public/api/blog'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

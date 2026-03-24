@@ -23,7 +23,7 @@ const AdminStays = () => {
   const fetchStays = () => {
     if (user && user.role === 'admin') {
       setLoading(true);
-      fetch('http://localhost/aamya_holiday/backend/public/api/stays')
+      fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/stays' : '/backend/public/api/stays'))
         .then(res => res.json())
         .then(data => {
             if (data.status === 'success') {
@@ -43,7 +43,7 @@ const AdminStays = () => {
 
   const handleEdit = (slug) => {
       setMessage('Loading property data...');
-      fetch(`http://localhost/aamya_holiday/backend/public/api/stays/${slug}`)
+      fetch(`${(window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api' : '/backend/public/api'}/stays/${slug}`)
         .then(res => res.json())
         .then(data => {
             if (data.status === 'success') {
@@ -77,7 +77,7 @@ const AdminStays = () => {
           };
           if (editingId) payload.id = editingId;
 
-          const res = await fetch('http://localhost/aamya_holiday/backend/public/api/stays', {
+          const res = await fetch(((window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? 'http://localhost/aamya_holiday/backend/public/api/stays' : '/backend/public/api/stays'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)
