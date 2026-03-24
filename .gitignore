@@ -1,0 +1,8 @@
+node_modules/
+vendor/
+.env
+.DS_Store
+.vscode/
+
+# Keep frontend dist for easier cPanel sync if using direct git pulls
+# /frontend/dist/
